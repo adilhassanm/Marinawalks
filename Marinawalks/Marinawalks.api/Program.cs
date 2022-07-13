@@ -1,4 +1,5 @@
 using Marinawalks.api.Data;
+using Marinawalks.api.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 //lets add our dbcontext services here with options of sql server and connection string
 builder.Services.AddDbContext<MariwalksDbContext>(options=>
 {
@@ -17,6 +20,12 @@ builder.Services.AddDbContext<MariwalksDbContext>(options=>
 }
 );
 
+//create builder for next dependency injection
+
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();//whenevr we ask for iregionrep give me its implemetation,and after adding them to services we can use them in controller
+//inject autmapper profile
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
