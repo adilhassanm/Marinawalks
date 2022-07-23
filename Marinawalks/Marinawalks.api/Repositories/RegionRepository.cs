@@ -25,5 +25,13 @@ namespace Marinawalks.api.Repositories
             //goto program.cs file and create one more builder
 
         }
+
+        public  async Task<IEnumerable<Test>> GetAsync(Guid id)
+        {
+            //return await mariwalksDbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
+            //return await mariwalksDbContext.Regions.Where(x => x.Id == id).Select(x => new { x.Id, x.Area })
+           var region = await mariwalksDbContext.Regions.Select(x => new Test() { Id =x.Id, Lat = x.Lat, Long = x.Long }).Where(x => x.Id == id).ToListAsync();
+            return region;
+        }
     }
 }

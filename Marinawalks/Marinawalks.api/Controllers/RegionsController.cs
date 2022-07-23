@@ -24,7 +24,7 @@ namespace Marinawalks.api.Controllers
             this.mapper = mapper;
         }
 
-        
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllRegions()
@@ -92,6 +92,21 @@ namespace Marinawalks.api.Controllers
             */
             var regionsDTO = mapper.Map<List<Model.DTO.Region>>(regions);//Here regions from domain model is mapped to DTO in one line of code
             return Ok(regionsDTO);
+        }
+
+
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> GetRegionAsync(Guid id)
+        {
+            var region = await regionRepository.GetAsync(id);
+
+            if(region == null)
+            {
+                return NotFound();
+            }
+            var regionDTO = mapper.Map<List<Model.DTO.Test>>(region);
+            return Ok(regionDTO);
         }
     }
 }

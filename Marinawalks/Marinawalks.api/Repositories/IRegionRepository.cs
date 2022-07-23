@@ -9,5 +9,7 @@ namespace Marinawalks.api.Repositories
 
         Task<IEnumerable<Region>> GetAllAsync();//enumeable in c# is basically generators of vales or numbers,like generate process and then generate etc like generating value from list one by one and processing etc
 
+        Task<IEnumerable<Test>> GetAsync(Guid id);
+
     }
 }
