@@ -11,6 +11,7 @@ namespace Marinawalks.api.Profiles
             //here we want to convert a domain model to a dto
             CreateMap<Model.Domain.Region, Model.DTO.Region>();
             CreateMap<Model.Domain.Test, Model.DTO.Test>();
+            CreateMap<Model.Domain.TestJoin, Model.DTO.TestJoin>();
 
             //here automapper is smart enough to map the source domain and destination dto one to one
 

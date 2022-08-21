@@ -94,7 +94,7 @@ namespace Marinawalks.api.Controllers
             return Ok(regionsDTO);
         }
 
-
+/*
         [HttpGet]
         [Route("{id:guid}")]
         public async Task<IActionResult> GetRegionAsync(Guid id)
@@ -106,6 +106,20 @@ namespace Marinawalks.api.Controllers
                 return NotFound();
             }
             var regionDTO = mapper.Map<List<Model.DTO.Test>>(region);
+            return Ok(regionDTO);
+        }
+*/
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> GetRegionAsync2(Guid id)
+        {
+            var region = await regionRepository.GetAsync2(id);
+
+            if (region == null)
+            {
+                return NotFound();
+            }
+            var regionDTO = mapper.Map<List<Model.DTO.TestJoin>>(region);
             return Ok(regionDTO);
         }
     }

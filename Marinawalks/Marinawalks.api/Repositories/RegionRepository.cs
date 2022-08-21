@@ -33,5 +33,25 @@ namespace Marinawalks.api.Repositories
            var region = await mariwalksDbContext.Regions.Select(x => new Test() { Id =x.Id, Lat = x.Lat, Long = x.Long }).Where(x => x.Id == id).ToListAsync();
             return region;
         }
+
+        public async Task<IEnumerable<TestJoin>> GetAsync2(Guid id)
+        {
+            //return await mariwalksDbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
+            //return await mariwalksDbContext.Regions.Where(x => x.Id == id).Select(x => new { x.Id, x.Area })
+            var region = await mariwalksDbContext.Regions.Join(mariwalksDbContext.Walks, e => e.Id, d => d.RegionId, (reg, walk) => new TestJoin() {
+                Id = reg.Id,
+                Lat = reg.Lat,
+                Long = reg.Long,
+                Name = walk.Name
+
+
+
+            }).Where(x => x.Id == id).ToListAsync();
+
+
+
+            //Select(x => new Test() { Id = x.Id, Lat = x.Lat, Long = x.Long }).Where(x => x.Id == id).ToListAsync();
+            return region;
+        }
     }
 }

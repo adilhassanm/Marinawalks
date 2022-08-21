@@ -11,5 +11,8 @@ namespace Marinawalks.api.Repositories
 
         Task<IEnumerable<Test>> GetAsync(Guid id);
 
+        Task<IEnumerable<TestJoin>> GetAsync2(Guid id);
+
+
     }
 }
